@@ -4,11 +4,15 @@ type Props = {
     price: number;
 }
 
+const formatPrice = (price: number) => {
+    return new Intl.NumberFormat('pt-BR', { minimumFractionDigits: 2 }).format(price);
+}
+
 const ProductPrice = ({ price }: Props) => {
     return (
         <div className="product-price-container" >
             <span className="product-currency" >R$</span>
-            <h6 className="product-price" >{price}</h6>
+            <h6 className="product-price" >{formatPrice(price)}</h6>
         </div>
     );
 }
