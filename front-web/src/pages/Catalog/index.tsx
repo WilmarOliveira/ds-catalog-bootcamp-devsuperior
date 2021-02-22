@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import ProductCard from './components/ProductCard';
-import { makeRequest } from '../../core/utils/request';
+import { makeRequest } from 'core/utils/request';
 import { Link } from 'react-router-dom';
 import './styles.scss';
-import { ProductsResponse } from '../../core/types/Product';
+import { ProductsResponse } from 'core/types/Product';
 import ProductCardLoader from './components/Loaders/ProductCardLoader';
 
 const Catalog = () => {
