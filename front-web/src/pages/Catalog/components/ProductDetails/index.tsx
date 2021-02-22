@@ -5,6 +5,8 @@ import './styles.scss';
 import ProductPrice from '../../../../core/components/ProductPrice';
 import { makeRequest } from '../../../../core/utils/request';
 import { Product } from '../../../../core/types/Product';
+import ProductDescriptionLoader from '../Loaders/ProductDescriptionLoader';
+import ProductInfoLoader from '../Loaders/ProductInfoLoader';
 
 type ParamsType = {
     productId: string;
@@ -13,10 +15,13 @@ type ParamsType = {
 const ProductDetails = () => {
     const { productId } = useParams<ParamsType>();
     const [product, setProduct] = useState<Product>();
-    
+    const [isLoading, setIsLoading] = useState(false);
+
     useEffect(() => {
+        setIsLoading(true);
         makeRequest({ url: `/products/${productId}` })
-            .then((response) => setProduct(response.data));
+            .then((response) => setProduct(response.data))
+            .finally(() => setIsLoading(false));
     }, [productId])
 
     return (
@@ -28,17 +33,29 @@ const ProductDetails = () => {
                 </Link>
                 <div className="row" >
                     <div className="col-6 pr-5" >
-                        <div className="product-details-card text-center" >
-                            <img src={product?.imgUrl} alt={product?.name} />
-                        </div>
-                        <h1 className="product-details-name" >{product?.name}</h1>
-                        {product?.price && <ProductPrice price={product?.price} />}
+                        {isLoading ?
+                            <ProductInfoLoader />
+                            :
+                            <>
+                                <div className="product-details-card text-center" >
+                                    <img src={product?.imgUrl} alt={product?.name} />
+                                </div>
+                                <h1 className="product-details-name" >{product?.name}</h1>
+                                {product?.price && <ProductPrice price={product?.price} />}
+                            </>
+                        }
                     </div>
                     <div className="col-6 product-details-card" >
-                        <h1 className="product-details-title" >Descrição do Produto</h1>
-                        <p className="product-details-text" >
-                        {product?.description}
-                        </p>
+                        {isLoading ?
+                            <ProductDescriptionLoader />
+                            :
+                            <>
+                                <h1 className="product-details-title" >Descrição do Produto</h1>
+                                <p className="product-details-text" >
+                                    {product?.description}
+                                </p>
+                            </>
+                        }
                     </div>
                 </div>
             </div>
