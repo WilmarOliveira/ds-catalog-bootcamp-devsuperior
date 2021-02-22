@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import './styles.scss';
 import { ProductsResponse } from 'core/types/Product';
 import ProductCardLoader from './components/Loaders/ProductCardLoader';
+import Pagination from './components/Pagination';
 
 const Catalog = () => {
     const [productsResponse, setProductsResponse] = useState<ProductsResponse>();
@@ -39,6 +40,7 @@ const Catalog = () => {
                 ))
             }
         </div>
+        <Pagination />
     </div>
 );
 }
