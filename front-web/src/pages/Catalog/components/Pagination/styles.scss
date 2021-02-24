@@ -4,7 +4,6 @@
     align-items: center;
     height: 40px;
     margin-top: 35px;
-    margin-bottom: 45px;
 }
 
 .pagination-item {
@@ -30,12 +29,18 @@
 .pagination-previous {
     margin-right: 25px;
     transform: rotate(-180deg);
-    color: #E1E1E1;
-    cursor: pointer;
 }
 
 .pagination-next {
     margin-left: 15px;
+}
+
+.page-active {
     color: #407BFF;
     cursor: pointer;
+}
+
+.page-inactive {
+    color: #E1E1E1;
+    pointer-events: none;
 }
