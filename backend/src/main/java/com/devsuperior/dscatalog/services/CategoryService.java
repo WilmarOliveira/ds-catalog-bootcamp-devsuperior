@@ -30,16 +30,6 @@ public class CategoryService {
 		
 		return list.map(x -> new CategoryDTO(x));
 		
-		
-		//Outra forma válida de realizar o processo de busca no padrão DTO
-		/*
-		List<CategoryDTO> listDTO = new ArrayList<>();
-		for (Category cat : list) {
-			listDTO.add(new CategoryDTO(cat));
-		}
-		
-		return listDTO;
-		*/
 	}
 
 	@Transactional(readOnly = true)
